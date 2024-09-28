@@ -50,5 +50,5 @@ type ReturnStatement struct {
 	ReturnVaule Expression
 }
 
-func (rs *ReturnStatement) expressionNode()      {}
+func (rs *ReturnStatement) statementNode()      {}
 func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
