@@ -1,0 +1,3 @@
+test:
+	@echo "Make testing..."
+	go test -v -race ./...
