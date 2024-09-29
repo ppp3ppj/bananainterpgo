@@ -51,7 +51,7 @@ func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
 
 type ReturnStatement struct {
 	Token       token.Token
-	ReturnVaule Expression
+	ReturnValue Expression
 }
 
 func (rs *ReturnStatement) statementNode()      {}
@@ -96,13 +96,20 @@ func (rs *ReturnStatement) String() string {
 
     out.WriteString(rs.TokenLiteral() + " ")
 
-    if rs.ReturnVaule != nil {
-        out.WriteString(rs.ReturnVaule.String())
+    if rs.ReturnValue != nil {
+        out.WriteString(rs.ReturnValue.String())
     }
 
     out.WriteString(";")
 
     return out.String()
+}
+
+func (es *ExpressionStatement) String() string {
+    if es.Expression != nil {
+        return es.Expression.String()
+    }
+    return ""
 }
 
 func (i *Identifier) String() string { return i.Value }
