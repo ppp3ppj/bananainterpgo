@@ -67,14 +67,14 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerPrefix(token.MINUS, p.parsePrefixExpression)
 
     p.infixParseFns = make(map[token.TokenType]infixParseFn)
-    p.registerInfix(token.PLUS, p.parseInflixExpression)
-    p.registerInfix(token.MINUS, p.parseInflixExpression)
-    p.registerInfix(token.SLASH, p.parseInflixExpression)
-    p.registerInfix(token.ASTERISK, p.parseInflixExpression)
-    p.registerInfix(token.EQ, p.parseInflixExpression)
-    p.registerInfix(token.NOT_EQ, p.parseInflixExpression)
-    p.registerInfix(token.LT, p.parseInflixExpression)
-    p.registerInfix(token.GT, p.parseInflixExpression)
+    p.registerInfix(token.PLUS, p.parseInfixExpression)
+    p.registerInfix(token.MINUS, p.parseInfixExpression)
+    p.registerInfix(token.SLASH, p.parseInfixExpression)
+    p.registerInfix(token.ASTERISK, p.parseInfixExpression)
+    p.registerInfix(token.EQ, p.parseInfixExpression)
+    p.registerInfix(token.NOT_EQ, p.parseInfixExpression)
+    p.registerInfix(token.LT, p.parseInfixExpression)
+    p.registerInfix(token.GT, p.parseInfixExpression)
 
 	// read two tokes, so curToken and peekToken are both set
 	p.nextToken()
@@ -261,7 +261,7 @@ func (p *Parser) curPrecedence() int {
     return LOWEST
 }
 
-func (p *Parser) parseInflixExpression(left ast.Expression) ast.Expression {
+func (p *Parser) parseInfixExpression(left ast.Expression) ast.Expression {
     expression := &ast.InfixExpression{
         Token: p.curToken,
         Operator: p.curToken.Literal,
